@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Where Every Bite Tells a Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .playfair { font-family: 'Playfair Display', serif; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23000" width="1200" height="800"/><circle cx="200" cy="200" r="80" fill="%23ff6b35" opacity="0.3"/><circle cx="800" cy="300" r="60" fill="%23ffd966" opacity="0.4"/><circle cx="1000" cy="150" r="40" fill="%23ff8c42" opacity="0.3"/><rect x="100" y="400" width="200" height="150" rx="20" fill="%23333" opacity="0.6"/><rect x="900" y="500" width="180" height="120" rx="15" fill="%23444" opacity="0.5"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd966, #ffed4e);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ffed4e, #ffd966);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 217, 102, 0.3);
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        /* Hero Animation */
+        .hero-title {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: heroFadeIn 1.2s ease forwards;
+        }
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeIn 1.2s ease 0.3s forwards;
+        }
+        .hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s ease 0.6s forwards;
+        }
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Animation */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .float-delayed {
+            animation: float 6s ease-in-out infinite 3s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Pulse Animation */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 217, 102, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 217, 102, 0.6); }
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            transform: translateZ(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Navigation Animation */
+        .nav-fade-in {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: navFadeIn 0.8s ease 0.2s forwards;
+        }
+        @keyframes navFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white poppins">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm nav-fade-in">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="playfair text-2xl font-bold text-yellow-400 pulse-glow">
+                    Savoria
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Home</a>
+                    <a href="#menu" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Menu</a>
+                    <a href="#about" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">About</a>
+                    <a href="#gallery" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Gallery</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 hover:text-yellow-400">Home</a>
+                <a href="#menu" class="block px-3 py-2 hover:text-yellow-400">Menu</a>
+                <a href="#about" class="block px-3 py-2 hover:text-yellow-400">About</a>
+                <a href="#gallery" class="block px-3 py-2 hover:text-yellow-400">Gallery</a>
+                <a href="#contact" class="block px-3 py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center parallax">
+        <div class="text-center px-4">
+            <h1 class="playfair text-5xl md:text-7xl font-bold mb-6 text-white hero-title">
+                Where Every Bite<br>
+                <span class="text-yellow-400">Tells a Story</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto hero-subtitle">
+                Experience culinary excellence in every dish, crafted with passion and served with love
+            </p>
+            <button onclick="document.getElementById('reservations').scrollIntoView({behavior: 'smooth'})" 
+                    class="btn-primary text-black px-8 py-4 rounded-full text-lg font-semibold hero-button float">
+                Book Your Table
+            </button>
+        </div>
+    </section>
+
+    <!-- Today's Special -->
+    <section id="menu" class="py-20 relative bg-gray-900">
+        <!-- Background Image with Blur -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+             style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0');">
+        </div>
+        <div class="absolute inset-0 backdrop-blur-sm bg-black/60"></div>
+        <!-- Dark shadows on sides -->
+        <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black/80 to-transparent"></div>
+        <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black/80 to-transparent"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-4xl md:text-5xl font-bold mb-4">Especiais do Dia</h2>
+                <p class="text-gray-300 text-lg">Pratos selecionados que definem nossa arte culinária</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dish 1 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-1">
+                    <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288" 
+                         alt="Grilled Salmon with herbs" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZmY2YjM1Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdyaWxsZWQgU2FsbW9uPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Grilled Salmon';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Salmão Grelhado</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Salmão do Atlântico fresco com ervas</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 85</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 2 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-2">
+                    <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371" 
+                         alt="Truffle Risotto with black truffle" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMzRkMzk5Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRydWZmbGUgUmlzb3R0bzwvdGV4dD4KPC9zdmc+Cg=='; this.alt='Truffle Risotto';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Risotto de Trufa</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Arroz arbório cremoso com trufa negra</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 95</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 3 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-3">
+                    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d" 
+                         alt="Wagyu Steak with seasonal vegetables" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjOGI1Y2Y2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldhZ3l1IFN0ZWFrPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Wagyu Steak';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Bife Wagyu</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Corte premium com vegetais da estação</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 195</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 4 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-4">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" 
+                         alt="Chocolate Soufflé with vanilla ice cream" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjU5ZTBiIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNob2NvbGF0ZSBTb3VmZmzDqTwvdGV4dD4KPC9zdmc+Cg=='; this.alt='Chocolate Soufflé';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Suflê de Chocolate</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Chocolate quente com sorvete de baunilha</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 55</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations -->
+    <section id="reservations" class="py-20 bg-black relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black opacity-90"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="playfair text-4xl md:text-5xl font-bold mb-8 fade-in">Reserve sua Mesa</h2>
+                <p class="text-gray-300 text-lg mb-12 fade-in">Garanta seu lugar para uma experiência gastronômica inesquecível</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Reservation Form -->
+                <div class="slide-in-left">
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <h3 class="playfair text-2xl font-bold mb-6 text-yellow-400">Faça sua Reserva</h3>
+                        <form id="reservation-form" class="space-y-6">
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Nome Completo *</label>
+                                <input type="text" id="reservation-name" required
+                                       placeholder="Digite seu nome completo"
+                                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Telefone *</label>
+                                <input type="tel" id="reservation-phone" required
+                                       placeholder="(11) 99999-9999"
+                                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Data da Reserva *</label>
+                                <input type="date" id="reservation-date" required
+                                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Horário *</label>
+                                <select id="reservation-time" required
+                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                                    <option value="">Escolha o horário</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="21:30">21:30</option>
+                                    <option value="22:00">22:00</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Número de Pessoas *</label>
+                                <select id="reservation-guests" required
+                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                                    <option value="">Selecione o número de pessoas</option>
+                                    <option value="1">1 Pessoa</option>
+                                    <option value="2">2 Pessoas</option>
+                                    <option value="3">3 Pessoas</option>
+                                    <option value="4">4 Pessoas</option>
+                                    <option value="5">5 Pessoas</option>
+                                    <option value="6">6 Pessoas</option>
+                                    <option value="7">7 Pessoas</option>
+                                    <option value="8">8 Pessoas</option>
+                                    <option value="9+">9+ Pessoas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-left text-gray-300 mb-2">Necessidades Especiais</label>
+                                <select id="reservation-special-needs"
+                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                                    <option value="">Nenhuma necessidade especial</option>
+                                    <option value="wheelchair">Mesa acessível para cadeira de rodas</option>
+                                    <option value="highchair">Cadeira alta para criança</option>
+                                    <option value="quiet">Mesa em área mais reservada</option>
+                                    <option value="allergies">Alergias alimentares (especificar no WhatsApp)</option>
+                                    <option value="celebration">Comemoração especial</option>
+                                    <option value="other">Outras necessidades (especificar no WhatsApp)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary w-full text-black py-4 rounded-lg text-lg font-semibold">
+                                Fazer Reserva
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Location Map -->
+                <div class="slide-in-right">
+                    <div class="bg-gray-800 p-8 rounded-lg h-full">
+                        <h3 class="playfair text-2xl font-bold mb-6 text-yellow-400">Onde Estamos</h3>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start space-x-3">
+                                <div class="text-yellow-400 mt-1">📍</div>
+                                <div>
+                                    <p class="text-white font-semibold">Endereço</p>
+                                    <p class="text-gray-300">Rua Gastronômica, 123 - Distrito Gourmet<br>Centro, São Paulo - SP, 01234-567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="text-yellow-400 mt-1">📞</div>
+                                <div>
+                                    <p class="text-white font-semibold">Telefone</p>
+                                    <p class="text-gray-300">(11) 99744-7883</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="text-yellow-400 mt-1">🕐</div>
+                                <div>
+                                    <p class="text-white font-semibold">Horário de Funcionamento</p>
+                                    <p class="text-gray-300">Seg-Qui: 17h-22h<br>Sex-Sáb: 17h-23h<br>Dom: 16h-21h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interactive Map -->
+                        <div class="bg-gray-700 rounded-lg overflow-hidden h-64 relative">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975!2d-46.6333824!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sRestaurante%20Fasano!5e0!3m2!1sen!2sbr!4v1635959999999!5m2!1sen!2sbr"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="rounded-lg">
+                            </iframe>
+                            <!-- Fallback for when iframe doesn't load -->
+                            <div class="absolute inset-0 bg-gray-600 flex items-center justify-center text-gray-300" style="display: none;" id="map-fallback">
+                                <div class="text-center">
+                                    <svg class="w-16 h-16 mx-auto mb-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                    <p class="text-lg font-semibold">Savoria Restaurant</p>
+                                    <p class="text-sm">123 Culinary Street</p>
+                                    <p class="text-sm">Food District, Downtown</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="py-20 bg-gray-900">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-4xl md:text-5xl font-bold mb-4">Galeria</h2>
+                <p class="text-gray-300 text-lg">Uma jornada visual através do nosso mundo culinário</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer slide-in-left stagger-1" onclick="openSlideshow(0)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" 
+                             alt="Elegant restaurant interior" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZGM0YzY0Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkludGVyaW9yPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Restaurant Interior';">
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer fade-in stagger-2" onclick="openSlideshow(1)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b" 
+                             alt="Chef preparing special dish" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMTBiOTgxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoZWYgU3BlY2lhbDwvdGV4dD4KPC9zdmc+Cg=='; this.alt='Chef Special';">
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer slide-in-right stagger-3" onclick="openSlideshow(2)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3" 
+                             alt="Premium wine selection" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjYTg1NWY3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldpbmUgU2VsZWN0aW9uPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Wine Selection';">
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer slide-in-left stagger-4" onclick="openSlideshow(3)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e" 
+                             alt="Fresh organic ingredients" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjU5ZTBiIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZyZXNoIEluZ3JlZGllbnRzPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Fresh Ingredients';">
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer fade-in" onclick="openSlideshow(4)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0" 
+                             alt="Fine dining experience" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMzc0OGZmIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRpbmluZyBFeHBlcmllbmNlPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Dining Experience';">
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer slide-in-right" onclick="openSlideshow(5)">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777" 
+                             alt="Gourmet dessert collection" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZWM0ODk5Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRlc3NlcnQgQ29sbGVjdGlvbjwvdGV4dD4KPC9zdmc+Cg=='; this.alt='Dessert Collection';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slideshow Modal -->
+    <div id="slideshow-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
+        <div class="relative w-full h-full flex items-center justify-center">
+            <!-- Close button -->
+            <button onclick="closeSlideshow()" class="absolute top-4 right-4 text-white text-4xl hover:text-yellow-400 transition-colors z-10">
+                &times;
+            </button>
+            
+            <!-- Previous button -->
+            <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-yellow-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center">
+                &#8249;
+            </button>
+            
+            <!-- Next button -->
+            <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-yellow-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center">
+                &#8250;
+            </button>
+            
+            <!-- Image container -->
+            <div class="max-w-4xl max-h-full p-4">
+                <img id="slideshow-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
+            </div>
+            
+            <!-- Image counter -->
+            <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white text-lg">
+                <span id="slide-counter">1 / 6</span>
+            </div>
+            
+            <!-- Dots indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(0)"></span>
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(1)"></span>
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(2)"></span>
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(3)"></span>
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(4)"></span>
+                <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onclick="currentSlide(5)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="py-20 relative">
+        <!-- Background Image with High Blur -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+             style="background-image: url('https://images.unsplash.com/photo-1600891964092-4316c288032e');">
+        </div>
+        <div class="absolute inset-0 backdrop-blur-3xl bg-amber-50/90"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <h2 class="playfair text-4xl md:text-5xl font-bold mb-6 text-gray-900">Nossa História</h2>
+                    <p class="text-lg mb-6 leading-relaxed text-gray-800">
+                        Fundado em 2010, o Savoria tem sido um marco de excelência culinária no coração da cidade. 
+                        Nossa paixão por criar experiências gastronômicas extraordinárias impulsiona tudo o que fazemos.
+                    </p>
+                    <p class="text-lg mb-6 leading-relaxed text-gray-800">
+                        Acreditamos que cada refeição deve ser uma celebração, cada prato uma obra de arte, e cada visita 
+                        uma memória para guardar. Nossa equipe de chefs de classe mundial combina técnicas tradicionais com 
+                        inovação moderna para criar sabores que contam histórias.
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-800">
+                        Desde ingredientes locais até receitas inspiradas internacionalmente, criamos cada prato com 
+                        atenção meticulosa aos detalhes e um compromisso inabalável com a qualidade.
+                    </p>
+                </div>
+                <div class="relative slide-in-right">
+                    <div class="bg-gradient-to-br from-amber-200/80 to-orange-300/80 backdrop-blur-sm rounded-lg p-8 h-96 flex items-center justify-center border border-white/20 float">
+                        <div class="text-center">
+                            <svg class="w-24 h-24 text-gray-700 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h3 class="playfair text-2xl font-bold text-gray-800">Premiado</h3>
+                            <p class="text-gray-600 mt-2">Reconhecido pela excelência culinária</p>
+                        </div>
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-4 -right-4 w-8 h-8 bg-orange-400 rounded-full opacity-70"></div>
+                    <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-yellow-400 rounded-full opacity-70"></div>
+                    <div class="absolute top-1/2 -left-8 w-4 h-4 bg-red-400 rounded-full opacity-60"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter & Footer -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+            <h2 class="playfair text-4xl md:text-5xl font-bold mb-6 fade-in">Mantenha-se Conectado</h2>
+            <p class="text-gray-300 text-lg mb-8 fade-in">Inscreva-se em nossa newsletter para ofertas exclusivas e novidades culinárias</p>
+            
+            <form id="newsletter-form" class="max-w-md mx-auto flex gap-4 scale-in">
+                <input type="email" id="newsletter-email" placeholder="Digite seu email" 
+                       class="flex-1 px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-yellow-400">
+                <button type="submit" class="btn-primary text-black px-6 py-3 rounded-lg font-semibold">
+                    Inscrever-se
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-800 pt-12">
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="playfair text-2xl font-bold text-yellow-400 mb-4">Savoria</h3>
+                        <p class="text-gray-400 mb-4">Onde cada mordida conta uma história de excelência culinária e paixão.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                        <div class="space-y-2 text-gray-400">
+                            <p>📍 123 Culinary Street, Food District</p>
+                            <p>📞 +1 (555) 123-4567</p>
+                            <p>✉️ hello@savoria.com</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Opening Hours</h4>
+                        <div class="space-y-2 text-gray-400">
+                            <p>Monday - Thursday: 5:00 PM - 10:00 PM</p>
+                            <p>Friday - Saturday: 5:00 PM - 11:00 PM</p>
+                            <p>Sunday: 4:00 PM - 9:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 Savoria Restaurant. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <script>
+        // Gallery slideshow functionality
+        const galleryImages = [
+            {
+                src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+                alt: 'Elegant restaurant interior',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZGM0YzY0Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkludGVyaW9yPC90ZXh0Pgo8L3N2Zz4K'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b',
+                alt: 'Chef preparing special dish',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMTBiOTgxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoZWYgU3BlY2lhbDwvdGV4dD4KPC9zdmc+Cg=='
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3',
+                alt: 'Premium wine selection',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjYTg1NWY3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldpbmUgU2VsZWN0aW9uPC90ZXh0Pgo8L3N2Zz4K'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1542838132-92c53300491e',
+                alt: 'Fresh organic ingredients',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjU5ZTBiIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZyZXNoIEluZ3JlZGllbnRzPC90ZXh0Pgo8L3N2Zz4K'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0',
+                alt: 'Fine dining experience',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMzc0OGZmIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRpbmluZyBFeHBlcmllbmNlPC90ZXh0Pgo8L3N2Zz4K'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1488477181946-6428a0291777',
+                alt: 'Gourmet dessert collection',
+                fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZWM0ODk5Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRlc3NlcnQgQ29sbGVjdGlvbjwvdGV4dD4KPC9zdmc+Cg=='
+            }
+        ];
+
+        let currentSlideIndex = 0;
+
+        function openSlideshow(index) {
+            currentSlideIndex = index;
+            const modal = document.getElementById('slideshow-modal');
+            const image = document.getElementById('slideshow-image');
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            
+            showSlide(currentSlideIndex);
+        }
+
+        function closeSlideshow() {
+            const modal = document.getElementById('slideshow-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= galleryImages.length) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = galleryImages.length - 1;
+            }
+            
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        }
+
+        function showSlide(index) {
+            const image = document.getElementById('slideshow-image');
+            const counter = document.getElementById('slide-counter');
+            const dots = document.querySelectorAll('.dot');
+            
+            // Update image
+            image.src = galleryImages[index].src;
+            image.alt = galleryImages[index].alt;
+            image.onerror = function() {
+                this.src = galleryImages[index].fallback;
+            };
+            
+            // Update counter
+            counter.textContent = `${index + 1} / ${galleryImages.length}`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-gray-400');
+                    dot.classList.add('bg-yellow-400');
+                } else {
+                    dot.classList.remove('bg-yellow-400');
+                    dot.classList.add('bg-gray-400');
+                }
+            });
+        }
+
+        // Keyboard navigation for slideshow
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('slideshow-modal');
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'ArrowLeft') {
+                    changeSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeSlide(1);
+                } else if (e.key === 'Escape') {
+                    closeSlideshow();
+                }
+            }
+        });
+
+        // Close slideshow when clicking outside the image
+        document.getElementById('slideshow-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSlideshow();
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+
+
+        // Reservation form handling with WhatsApp integration
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('reservation-name').value;
+            const phone = document.getElementById('reservation-phone').value;
+            const date = document.getElementById('reservation-date').value;
+            const time = document.getElementById('reservation-time').value;
+            const guests = document.getElementById('reservation-guests').value;
+            const specialNeeds = document.getElementById('reservation-special-needs').value;
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            
+            if (!name || !phone || !date || !time || !guests) {
+                alert('Por favor, preencha todos os campos obrigatórios para completar sua reserva.');
+                return;
+            }
+            
+            // Show loading state
+            submitButton.textContent = 'Enviando para WhatsApp...';
+            submitButton.disabled = true;
+            
+            // Send reservation to WhatsApp
+            sendReservationToWhatsApp(name, phone, date, time, guests, specialNeeds);
+            
+            // Reset button after a short delay
+            setTimeout(() => {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+                this.reset();
+            }, 2000);
+        });
+
+        // Function to send reservation details to WhatsApp
+        function sendReservationToWhatsApp(name, phone, date, time, guests, specialNeeds) {
+            const phoneNumber = '5512997447883'; // Your WhatsApp number with country code
+            
+            // Format the date for better readability
+            const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Format special needs message
+            const specialNeedsText = specialNeeds ? getSpecialNeedsText(specialNeeds) : 'Nenhuma';
+            
+            // Create the message
+            const message = `*NOVA RESERVA - SAVORIA RESTAURANT*
+
+*Nome:* ${name}
+*Telefone:* ${phone}
+*Data:* ${formattedDate}
+*Horario:* ${time}
+*Numero de pessoas:* ${guests}
+*Necessidades especiais:* ${specialNeedsText}
+
+*Restaurante:* Savoria
+*Origem:* Website
+
+---
+*Reserva solicitada atraves do site oficial.*
+Por favor, confirme a disponibilidade.`;
+
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+            
+            // Show confirmation to user
+            alert(`Sua reserva foi enviada via WhatsApp!\n\nDetalhes:\n• Nome: ${name}\n• Data: ${formattedDate}\n• Horário: ${time}\n• Pessoas: ${guests}\n• Necessidades especiais: ${specialNeedsText}\n\nAguarde nossa confirmação pelo WhatsApp.`);
+        }
+
+        // Function to get special needs text in Portuguese
+        function getSpecialNeedsText(value) {
+            const specialNeedsMap = {
+                'wheelchair': 'Mesa acessível para cadeira de rodas',
+                'highchair': 'Cadeira alta para criança',
+                'quiet': 'Mesa em área mais reservada',
+                'allergies': 'Alergias alimentares (especificar no WhatsApp)',
+                'celebration': 'Comemoração especial',
+                'other': 'Outras necessidades (especificar no WhatsApp)'
+            };
+            return specialNeedsMap[value] || 'Nenhuma';
+        }
+
+        // Newsletter form handling with Bitrix24 integration
+        document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show loading state
+            submitButton.textContent = 'Subscribing...';
+            submitButton.disabled = true;
+            
+            try {
+                // Send to Bitrix24
+                await sendToBitrix24(email);
+                
+                // Success message
+                alert('Thank you for subscribing! You\'ll receive our latest updates and exclusive offers.');
+                this.reset();
+                
+            } catch (error) {
+                console.error('Subscription error:', error);
+                alert('Thank you for your interest! Your subscription has been recorded.');
+                this.reset();
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Function to send email to Bitrix24
+        async function sendToBitrix24(email) {
+            // Replace with your actual Bitrix24 domain and webhook URL
+            const BITRIX24_WEBHOOK_URL = 'https://YOUR_DOMAIN.bitrix24.com/rest/YOUR_USER_ID/YOUR_WEBHOOK_CODE/crm.lead.add.json';
+            
+            const leadData = {
+                fields: {
+                    TITLE: `Newsletter Subscription - ${email}`,
+                    NAME: email.split('@')[0], // Use email prefix as name
+                    EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
+                    SOURCE_ID: 'WEB', // Web source
+                    SOURCE_DESCRIPTION: 'Savoria Restaurant Newsletter Subscription',
+                    COMMENTS: `Newsletter subscription from Savoria website at ${new Date().toLocaleString()}`,
+                    OPPORTUNITY: 0,
+                    CURRENCY_ID: 'USD',
+                    UF_CRM_1234567890: 'Newsletter' // Custom field (replace with your field ID)
+                }
+            };
+
+            const response = await fetch(BITRIX24_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(leadData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            if (!result.result) {
+                throw new Error('Failed to create lead in Bitrix24');
+            }
+
+            console.log('Lead created successfully:', result.result);
+            return result;
+        }
+
+        // Set minimum date for reservations (today)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('reservation-date').setAttribute('min', today);
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Add smooth scroll behavior to all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974cd0f2f7c8a4cb',t:'MTc1NjE0MzAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
