@@ -149,15 +149,15 @@
     <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm nav-fade-in">
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <div class="playfair text-2xl font-bold text-yellow-400 pulse-glow">
+                <div class="playfair text-2xl font-bold text-yellow-400">
                     Savoria
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Home</a>
-                    <a href="#menu" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Menu</a>
-                    <a href="#about" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">About</a>
-                    <a href="#gallery" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Gallery</a>
-                    <a href="#contact" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Contact</a>
+                    <a href="#home" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Início</a>
+                    <a href="#menu" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Cardápio</a>
+                    <a href="#about" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Sobre</a>
+                    <a href="#gallery" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Galeria</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition-all duration-300 hover:scale-110">Contato</a>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-white">
@@ -170,11 +170,11 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-95">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 hover:text-yellow-400">Home</a>
-                <a href="#menu" class="block px-3 py-2 hover:text-yellow-400">Menu</a>
-                <a href="#about" class="block px-3 py-2 hover:text-yellow-400">About</a>
-                <a href="#gallery" class="block px-3 py-2 hover:text-yellow-400">Gallery</a>
-                <a href="#contact" class="block px-3 py-2 hover:text-yellow-400">Contact</a>
+                <a href="#home" class="block px-3 py-2 hover:text-yellow-400">Início</a>
+                <a href="#menu" class="block px-3 py-2 hover:text-yellow-400">Cardápio</a>
+                <a href="#about" class="block px-3 py-2 hover:text-yellow-400">Sobre</a>
+                <a href="#gallery" class="block px-3 py-2 hover:text-yellow-400">Galeria</a>
+                <a href="#contact" class="block px-3 py-2 hover:text-yellow-400">Contato</a>
             </div>
         </div>
     </nav>
@@ -183,15 +183,15 @@
     <section id="home" class="hero-bg min-h-screen flex items-center justify-center parallax">
         <div class="text-center px-4">
             <h1 class="playfair text-5xl md:text-7xl font-bold mb-6 text-white hero-title">
-                Where Every Bite<br>
-                <span class="text-yellow-400">Tells a Story</span>
+                Onde Cada Garfada<br>
+                <span class="text-yellow-400">Conta uma História</span>
             </h1>
             <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto hero-subtitle">
-                Experience culinary excellence in every dish, crafted with passion and served with love
+                Experimente a excelência culinária em cada prato, criado com paixão e servido com amor
             </p>
             <button onclick="document.getElementById('reservations').scrollIntoView({behavior: 'smooth'})" 
                     class="btn-primary text-black px-8 py-4 rounded-full text-lg font-semibold hero-button float">
-                Book Your Table
+                Reserve sua Mesa
             </button>
         </div>
     </section>
@@ -212,7 +212,182 @@
                 <p class="text-gray-300 text-lg">Pratos selecionados que definem nossa arte culinária</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Menu Lists -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                <!-- Entradas -->
+                <div class="bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-yellow-400/20 fade-in">
+                    <h3 class="playfair text-3xl font-bold text-yellow-400 mb-6 text-center">Entradas</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Carpaccio de Salmão</h4>
+                                <p class="text-gray-300 text-sm">Fatias finas com alcaparras e molho de mostarda</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 45</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Bruschetta de Burrata</h4>
+                                <p class="text-gray-300 text-sm">Pão artesanal com tomate confitado e manjericão</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 38</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Ostras Gratinadas</h4>
+                                <p class="text-gray-300 text-sm">Meia dúzia com queijo gruyère e ervas finas</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 65</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Tártaro de Atum</h4>
+                                <p class="text-gray-300 text-sm">Atum fresco com abacate e molho ponzu</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 52</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Foie Gras Selado</h4>
+                                <p class="text-gray-300 text-sm">Com compota de figo e brioche tostado</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 78</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pratos Principais -->
+                <div class="bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-yellow-400/20 fade-in">
+                    <h3 class="playfair text-3xl font-bold text-yellow-400 mb-6 text-center">Pratos Principais</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Filé Wellington</h4>
+                                <p class="text-gray-300 text-sm">Filé mignon envolvido em massa folhada com duxelles</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 165</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Robalo Grelhado</h4>
+                                <p class="text-gray-300 text-sm">Com risotto de limão siciliano e aspargos</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 98</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Cordeiro Confitado</h4>
+                                <p class="text-gray-300 text-sm">Carré com crosta de ervas e ratatouille</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 145</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Pato Laqueado</h4>
+                                <p class="text-gray-300 text-sm">Magret com molho de cereja e purê de batata-doce</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 125</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Polvo Mediterrâneo</h4>
+                                <p class="text-gray-300 text-sm">Grelhado com azeite de ervas e batatas confitadas</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 115</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sobremesas -->
+                <div class="bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-yellow-400/20 fade-in">
+                    <h3 class="playfair text-3xl font-bold text-yellow-400 mb-6 text-center">Sobremesas</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Tiramisù Clássico</h4>
+                                <p class="text-gray-300 text-sm">Receita tradicional italiana com café expresso</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 35</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Crème Brûlée</h4>
+                                <p class="text-gray-300 text-sm">Creme de baunilha com açúcar caramelizado</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 32</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Petit Gateau</h4>
+                                <p class="text-gray-300 text-sm">Bolo quente de chocolate com sorvete de baunilha</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 42</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Cheesecake de Frutas Vermelhas</h4>
+                                <p class="text-gray-300 text-sm">Base de biscoito com calda de frutas da estação</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 38</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Tarte Tatin</h4>
+                                <p class="text-gray-300 text-sm">Torta francesa de maçã com sorvete de canela</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vinhos -->
+                <div class="bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-yellow-400/20 fade-in">
+                    <h3 class="playfair text-3xl font-bold text-yellow-400 mb-6 text-center">Carta de Vinhos</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Château Margaux 2015</h4>
+                                <p class="text-gray-300 text-sm">Bordeaux francês, corpo médio, taninos elegantes</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 850</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Barolo Brunate 2018</h4>
+                                <p class="text-gray-300 text-sm">Piemonte italiano, estruturado e complexo</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 420</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Casa Silva Reserva</h4>
+                                <p class="text-gray-300 text-sm">Cabernet Sauvignon chileno, frutado e equilibrado</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 180</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-600 pb-3">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Sancerre Blanc 2020</h4>
+                                <p class="text-gray-300 text-sm">Sauvignon Blanc francês, mineral e refrescante</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 320</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Champagne Dom Pérignon</h4>
+                                <p class="text-gray-300 text-sm">Vintage 2012, elegante e com perlage refinado</p>
+                            </div>
+                            <span class="text-yellow-400 font-bold text-lg ml-4">R$ 1.200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-12 fade-in">
+                <h3 class="playfair text-3xl md:text-4xl font-bold text-yellow-400">Pratos Especiais do Chefe</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <!-- Dish 1 -->
                 <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-1">
                     <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288" 
@@ -273,6 +448,73 @@
                             <h3 class="playfair text-xl font-bold mb-2 text-white">Suflê de Chocolate</h3>
                             <p class="text-gray-200 mb-3 text-sm">Chocolate quente com sorvete de baunilha</p>
                             <div class="text-yellow-400 text-2xl font-bold">R$ 55</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Chef's Special Dishes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dish 5 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-1">
+                    <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828" 
+                         alt="Lobster Thermidor with herbs" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZGM0YzY0Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvYnN0ZXIgVGhlcm1pZG9yPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Lobster Thermidor';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Lagosta Thermidor</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Lagosta gratinada com molho cremoso</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 285</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 6 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-2">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" 
+                         alt="Duck Confit with orange glaze" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMTBiOTgxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkR1Y2sgQ29uZml0PC90ZXh0Pgo8L3N2Zz4K'; this.alt='Duck Confit';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Pato Confitado</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Coxa de pato com glaceado de laranja</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 135</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 7 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-3">
+                    <img src="https://images.unsplash.com/photo-1559847844-5315695dadae" 
+                         alt="Beef Tenderloin with red wine reduction" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjYTg1NWY3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlZWYgVGVuZGVybG9pbjwvdGV4dD4KPC9zdmc+Cg=='; this.alt='Beef Tenderloin';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Filé ao Vinho Tinto</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Filé mignon com redução de vinho tinto</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 175</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 8 -->
+                <div class="card-hover rounded-lg overflow-hidden relative h-80 scale-in stagger-4">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03246963d96c" 
+                         alt="Sea Bass with Mediterranean herbs" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMzc0OGZmIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlNlYSBCYXNzPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Sea Bass';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="backdrop-blur-sm bg-black/30 rounded-lg p-4">
+                            <h3 class="playfair text-xl font-bold mb-2 text-white">Robalo Mediterrâneo</h3>
+                            <p class="text-gray-200 mb-3 text-sm">Robalo com ervas mediterrâneas</p>
+                            <div class="text-yellow-400 text-2xl font-bold">R$ 115</div>
                         </div>
                     </div>
                 </div>
@@ -621,26 +863,26 @@
                     </div>
                     
                     <div>
-                        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                        <h4 class="text-lg font-semibold mb-4">Informações de Contato</h4>
                         <div class="space-y-2 text-gray-400">
-                            <p>📍 123 Culinary Street, Food District</p>
-                            <p>📞 +1 (555) 123-4567</p>
-                            <p>✉️ hello@savoria.com</p>
+                            <p>📍 Rua Gastronômica, 123 - Distrito Gourmet</p>
+                            <p>📞 (11) 99744-7883</p>
+                            <p>✉️ contato@savoria.com</p>
                         </div>
                     </div>
                     
                     <div>
-                        <h4 class="text-lg font-semibold mb-4">Opening Hours</h4>
+                        <h4 class="text-lg font-semibold mb-4">Horário de Funcionamento</h4>
                         <div class="space-y-2 text-gray-400">
-                            <p>Monday - Thursday: 5:00 PM - 10:00 PM</p>
-                            <p>Friday - Saturday: 5:00 PM - 11:00 PM</p>
-                            <p>Sunday: 4:00 PM - 9:00 PM</p>
+                            <p>Segunda - Quinta: 17h - 22h</p>
+                            <p>Sexta - Sábado: 17h - 23h</p>
+                            <p>Domingo: 16h - 21h</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                    <p>&copy; 2024 Savoria Restaurant. All rights reserved.</p>
+                    <p>&copy; 2024 Restaurante Savoria. Todos os direitos reservados.</p>
                 </div>
             </div>
         </footer>
@@ -871,19 +1113,19 @@ Por favor, confirme a disponibilidade.`;
             const originalButtonText = submitButton.textContent;
             
             if (!email) {
-                alert('Please enter your email address.');
+                alert('Por favor, digite seu endereço de email.');
                 return;
             }
 
             // Validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
+                alert('Por favor, digite um endereço de email válido.');
                 return;
             }
             
             // Show loading state
-            submitButton.textContent = 'Subscribing...';
+            submitButton.textContent = 'Inscrevendo...';
             submitButton.disabled = true;
             
             try {
@@ -891,12 +1133,12 @@ Por favor, confirme a disponibilidade.`;
                 await sendToBitrix24(email);
                 
                 // Success message
-                alert('Thank you for subscribing! You\'ll receive our latest updates and exclusive offers.');
+                alert('Obrigado por se inscrever! Você receberá nossas últimas atualizações e ofertas exclusivas.');
                 this.reset();
                 
             } catch (error) {
                 console.error('Subscription error:', error);
-                alert('Thank you for your interest! Your subscription has been recorded.');
+                alert('Obrigado pelo seu interesse! Sua inscrição foi registrada.');
                 this.reset();
             } finally {
                 // Reset button state
@@ -994,6 +1236,9 @@ Por favor, confirme a disponibilidade.`;
                 document.getElementById('mobile-menu').classList.add('hidden');
             });
         });
+
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974cd0f2f7c8a4cb',t:'MTc1NjE0MzAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    
+<script src="//web.webformscr.com/apps/fc3/build/loader.js" async sp-form-id="92f6f49f3d4d70dd4b9e7e3541205a317f527f55f5a15d5f633d6a797a84550f"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97555958b0794f4a',t:'MTc1NjIzMjQ4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
